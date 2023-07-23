@@ -1,4 +1,4 @@
-App Super Gestão (Desenvolvimento Web Avançado com PHP, Laravel e Vue.JS)
+App Super Gestão (Site de gestão feito em laravel 7)
 
 - instalar PHP 7.4
 - instalar mysql
