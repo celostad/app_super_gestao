@@ -3,7 +3,7 @@
 @section('titulo', 'Produto')
 
 @section('conteudo')
-
+    
     <div class="conteudo-pagina">
 
         <div class="titulo-pagina-2">
@@ -26,34 +26,41 @@
                             <th>Descrição</th>
                             <th>Peso</th>
                             <th>Unidade ID</th>
+                            <th>Comprimento</th>
+                            <th>Altura</th>
+                            <th>Largura</th>
                             <th></th>
                             <th></th>
                             <th></th>
                         </tr>
-                    </thead>
+                    </head>
 
                     <tbody>
-                        @foreach ($produtos as $produto)
+                        @foreach($produtos as $produto)
                             <tr>
                                 <td>{{ $produto->nome }}</td>
                                 <td>{{ $produto->descricao }}</td>
                                 <td>{{ $produto->peso }}</td>
                                 <td>{{ $produto->unidade_id }}</td>
+                                <td>{{ $produto->comprimento ?? '' }}</td>
+                                <td>{{ $produto->altura ?? '' }}</td>
+                                <td>{{ $produto->largura ?? '' }}</td>
                                 <td><a href="{{ route('produto.show', ['produto' => $produto->id ]) }}">Visualizar</a></td>
                                 <td>
-                                    <form id="form_{{ $produto->id }}" method="post" action="{{ route('produto.destroy', ['produto' => $produto->id]) }}">
+                                    <form id="form_{{$produto->id}}" method="post" action="{{ route('produto.destroy', ['produto' => $produto->id]) }}">
                                         @method('DELETE')
                                         @csrf
                                         <!--<button type="submit">Excluir</button>-->
-                                        <a href="#" onclick="document.getElementById('form_{{ $produto->id }}').submit()">Excluir</a>
+                                        <a href="#" onclick="document.getElementById('form_{{$produto->id}}').submit()">Excluir</a>
                                     </form>
                                 </td>
-                                <td><a href="{{ route('produto.edit', ['produto' =>$produto->id ]) }}">Editar</a></td>
+                                <td><a href="{{ route('produto.edit', ['produto' => $produto->id ]) }}">Editar</a></td>
                             </tr>
                         @endforeach
                     </tbody>
                 </table>
 
+                
                 {{ $produtos->appends($request)->links() }}
 
                 <!--
@@ -75,3 +82,4 @@
     </div>
 
 @endsection
+
