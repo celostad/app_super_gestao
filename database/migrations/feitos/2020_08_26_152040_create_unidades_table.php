@@ -4,7 +4,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration {
+class CreateUnidadesTable extends Migration
+{
     /**
      * Run the migrations.
      *
@@ -14,19 +15,19 @@ return new class extends Migration {
     {
         Schema::create('unidades', function (Blueprint $table) {
             $table->id();
-            $table->string('unidade', 5); // cm, mm, kg
-            $table->string('descricao', 50);
+            $table->string('unidade', 5); //cm, mm, kg
+            $table->string('descricao', 30);
             $table->timestamps();
         });
 
-        // adicionar o relacionamento com a tabela produtos
-        Schema::table('produtos', function (Blueprint $table) {
+        //adicionar o relacionamento com a tabela produtos
+        Schema::table('produtos', function(Blueprint $table) {
             $table->unsignedBigInteger('unidade_id');
             $table->foreign('unidade_id')->references('id')->on('unidades');
         });
 
-        // adicionar o relacionamento com a tabela produto_detalhes
-        Schema::table('produto_detalhes', function (Blueprint $table) {
+        //adicionar o relacionamento com a tabela produto_detalhes
+        Schema::table('produto_detalhes', function(Blueprint $table) {
             $table->unsignedBigInteger('unidade_id');
             $table->foreign('unidade_id')->references('id')->on('unidades');
         });
@@ -54,7 +55,7 @@ return new class extends Migration {
             //remover a coluna unidade_id
             $table->dropColumn('unidade_id');
         });
-        
+
         Schema::dropIfExists('unidades');
     }
-};
+}
